@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en-IN" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <script>document.documentElement.classList.remove("no-js");</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Business loan calculators: EMI, borrowing capacity, refinancing, DSCR stress test | AK Advisors</title>
+  <meta name="description" content="Free calculators for Indian businesses: term loan EMI and repayment schedule, borrowing capacity from cash flows, refinancing break-even, DSCR stress test and working capital assessment.">
+  <link rel="canonical" href="https://akadvisors.in/tools.html">
+  <meta name="theme-color" content="#1D2730">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="AK Advisors and Consultants">
+  <meta property="og:title" content="Business loan calculators for Indian companies">
+  <meta property="og:description" content="EMI, borrowing capacity, refinancing break-even, DSCR stress test and working capital.">
+  <meta property="og:url" content="https://akadvisors.in/tools.html">
+  <meta property="og:locale" content="en_IN">
+  <link rel="icon" type="image/svg+xml" href="assets/compass-mark.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html" aria-label="AK Advisors and Consultants, home">
+        <img src="assets/compass-mark.svg" alt="" width="20" height="34">
+        <span class="brand-text"><span class="brand-name">AK Advisors</span><span class="brand-sub">and Consultants</span></span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="nav-toggle-bars" aria-hidden="true"></span><span class="visually-hidden">Menu</span>
+      </button>
+      <nav class="site-nav" id="site-nav" aria-label="Primary">
+        <ul>
+          <li><a href="index.html#services">Services</a></li>
+          <li><a href="index.html#approach">Our Approach</a></li>
+          <li><a href="index.html#partners">Partners</a></li>
+          <li><a href="markets.html">Rates &amp; News</a></li>
+          <li><a href="tools.html" aria-current="page">Tools</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+        <a class="btn btn-small" href="index.html#contact" data-book>Book a discussion</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="page-hero" aria-labelledby="page-title">
+      <div class="wrap">
+        <p class="crumbs"><a href="index.html">Home</a> / Tools</p>
+        <h1 id="page-title">Financing calculators</h1>
+        <p class="lede">Test a financing case the way a credit analyst would: repayments, borrowing capacity, the cost of switching lenders, resilience to shocks and working capital needs.</p>
+        <p class="asof-line">All amounts in ₹ crore unless stated. Results are indicative. Lenders apply their own assessment.</p>
+      </div>
+    </section>
+
+    <section class="section" aria-label="Calculators">
+      <div class="wrap">
+        <div class="tool-tabs" role="tablist" aria-label="Choose a calculator">
+          <button role="tab" id="tab-emi" aria-controls="tool-emi" aria-selected="true">EMI and repayment</button>
+          <button role="tab" id="tab-cap" aria-controls="tool-cap" aria-selected="false" tabindex="-1">Borrowing capacity</button>
+          <button role="tab" id="tab-refi" aria-controls="tool-refi" aria-selected="false" tabindex="-1">Refinancing cost</button>
+          <button role="tab" id="tab-risk" aria-controls="tool-risk" aria-selected="false" tabindex="-1">Stress test</button>
+          <button role="tab" id="tab-wc" aria-controls="tool-wc" aria-selected="false" tabindex="-1">Working capital</button>
+        </div>
+
+        <!-- ============ EMI ============ -->
+        <div class="tool" id="tool-emi" role="tabpanel" aria-labelledby="tab-emi" tabindex="0">
+          <div class="tool-intro">
+            <h2>EMI and repayment schedule</h2>
+            <p>Instalments, total interest and a year-by-year schedule for a term loan, including a moratorium and the choice between equated instalments and equal principal repayments.</p>
+          </div>
+          <form class="tool-inputs" data-calc="emi" onsubmit="return false">
+            <div class="field"><label for="emi-p">Loan amount (₹ crore)</label><input id="emi-p" name="p" type="number" min="0" step="0.01" value="49" inputmode="decimal"></div>
+            <div class="field"><label for="emi-r">Interest rate (% a year)</label><input id="emi-r" name="r" type="number" min="0" max="40" step="0.05" value="9.25" inputmode="decimal"></div>
+            <div class="field"><label for="emi-n">Tenor including moratorium (years)</label><input id="emi-n" name="n" type="number" min="1" max="30" step="1" value="7"></div>
+            <div class="field"><label for="emi-m">Moratorium on principal (months)</label><input id="emi-m" name="m" type="number" min="0" max="60" step="1" value="18"></div>
+            <div class="field"><label for="emi-f">Repayment frequency</label><select id="emi-f" name="f"><option value="12">Monthly</option><option value="4" selected>Quarterly</option></select></div>
+            <div class="field"><label for="emi-t">Repayment type</label><select id="emi-t" name="t"><option value="emi">Equated instalments (EMI)</option><option value="epi">Equal principal instalments</option></select></div>
+          </form>
+          <div class="tool-results" aria-live="polite" id="emi-out"></div>
+        </div>
+
+        <!-- ============ CAPACITY ============ -->
+        <div class="tool" id="tool-cap" role="tabpanel" aria-labelledby="tab-cap" tabindex="0" hidden>
+          <div class="tool-intro">
+            <h2>Borrowing capacity</h2>
+            <p>How much new debt your cash flows can support. Lenders size loans on two tests: cash flow cover (DSCR) and leverage (debt to EBITDA). The lower result is the binding constraint.</p>
+          </div>
+          <form class="tool-inputs" data-calc="cap" onsubmit="return false">
+            <div class="field"><label for="cap-e">Annual EBITDA (₹ crore)</label><input id="cap-e" name="e" type="number" min="0" step="0.1" value="24" inputmode="decimal"></div>
+            <div class="field"><label for="cap-t">Tax and maintenance capex a year (₹ crore)</label><input id="cap-t" name="t" type="number" min="0" step="0.1" value="5" inputmode="decimal"></div>
+            <div class="field"><label for="cap-d">Existing debt outstanding (₹ crore)</label><input id="cap-d" name="d" type="number" min="0" step="0.1" value="20" inputmode="decimal"></div>
+            <div class="field"><label for="cap-s">Existing annual debt service: interest plus principal (₹ crore)</label><input id="cap-s" name="s" type="number" min="0" step="0.1" value="5.5" inputmode="decimal"></div>
+            <div class="field"><label for="cap-r">Interest rate on new loan (%)</label><input id="cap-r" name="r" type="number" min="0" step="0.05" value="9.25" inputmode="decimal"></div>
+            <div class="field"><label for="cap-n">Tenor of new loan (years)</label><input id="cap-n" name="n" type="number" min="1" max="20" step="1" value="7"></div>
+            <div class="field"><label for="cap-dscr">Minimum DSCR the lender requires</label><div class="range-row"><input id="cap-dscr" name="dscr" type="range" min="1.1" max="2" step="0.05" value="1.3"><output for="cap-dscr">1.30x</output></div></div>
+            <div class="field"><label for="cap-lev">Maximum debt to EBITDA</label><div class="range-row"><input id="cap-lev" name="lev" type="range" min="1.5" max="6" step="0.25" value="3.5"><output for="cap-lev">3.50x</output></div></div>
+          </form>
+          <div class="tool-results" aria-live="polite" id="cap-out"></div>
+        </div>
+
+        <!-- ============ REFINANCING ============ -->
+        <div class="tool" id="tool-refi" role="tabpanel" aria-labelledby="tab-refi" tabindex="0" hidden>
+          <div class="tool-intro">
+            <h2>Refinancing cost and break-even</h2>
+            <p>Whether moving a loan to a lower rate pays for itself once you add foreclosure charges, processing fees, stamp duty and legal costs.</p>
+          </div>
+          <form class="tool-inputs" data-calc="refi" onsubmit="return false">
+            <div class="field"><label for="rf-o">Outstanding principal (₹ crore)</label><input id="rf-o" name="o" type="number" min="0" step="0.1" value="40" inputmode="decimal"></div>
+            <div class="field"><label for="rf-n">Remaining tenor (years)</label><input id="rf-n" name="n" type="number" min="1" max="30" step="1" value="6"></div>
+            <div class="field"><label for="rf-c">Current interest rate (%)</label><input id="rf-c" name="c" type="number" min="0" step="0.05" value="10.25" inputmode="decimal"></div>
+            <div class="field"><label for="rf-nr">New interest rate (%)</label><input id="rf-nr" name="nr" type="number" min="0" step="0.05" value="9.40" inputmode="decimal"></div>
+            <div class="field"><label for="rf-pp">Foreclosure / prepayment charge (% of outstanding)</label><input id="rf-pp" name="pp" type="number" min="0" max="10" step="0.05" value="1" inputmode="decimal"></div>
+            <div class="field"><label for="rf-pf">Processing fee on new loan (%)</label><input id="rf-pf" name="pf" type="number" min="0" max="5" step="0.05" value="0.5" inputmode="decimal"></div>
+            <div class="field"><label for="rf-x">Other one-time costs: stamp duty, legal, valuation, charge creation (₹ lakh)</label><input id="rf-x" name="x" type="number" min="0" step="1" value="15" inputmode="decimal"></div>
+          </form>
+          <div class="tool-results" aria-live="polite" id="refi-out"></div>
+        </div>
+
+        <!-- ============ STRESS TEST ============ -->
+        <div class="tool" id="tool-risk" role="tabpanel" aria-labelledby="tab-risk" tabindex="0" hidden>
+          <div class="tool-intro">
+            <h2>Debt service stress test</h2>
+            <p>How your debt service coverage holds up if earnings fall and floating rates rise, and how much headroom you have before breaching a covenant.</p>
+          </div>
+          <form class="tool-inputs" data-calc="risk" onsubmit="return false">
+            <div class="field"><label for="rk-e">Annual EBITDA (₹ crore)</label><input id="rk-e" name="e" type="number" min="0" step="0.1" value="24" inputmode="decimal"></div>
+            <div class="field"><label for="rk-t">Tax and maintenance capex a year (₹ crore)</label><input id="rk-t" name="t" type="number" min="0" step="0.1" value="4" inputmode="decimal"></div>
+            <div class="field"><label for="rk-d">Floating-rate debt outstanding (₹ crore)</label><input id="rk-d" name="d" type="number" min="0" step="0.1" value="60" inputmode="decimal"></div>
+            <div class="field"><label for="rk-r">Current average interest rate (%)</label><input id="rk-r" name="r" type="number" min="0" step="0.05" value="9.25" inputmode="decimal"></div>
+            <div class="field"><label for="rk-p">Principal repayable this year (₹ crore)</label><input id="rk-p" name="p" type="number" min="0" step="0.1" value="7" inputmode="decimal"></div>
+            <div class="field"><label for="rk-c">DSCR covenant</label><div class="range-row"><input id="rk-c" name="c" type="range" min="1" max="1.75" step="0.05" value="1.25"><output for="rk-c">1.25x</output></div></div>
+          </form>
+          <div class="tool-results" aria-live="polite" id="risk-out"></div>
+        </div>
+
+        <!-- ============ WORKING CAPITAL ============ -->
+        <div class="tool" id="tool-wc" role="tabpanel" aria-labelledby="tab-wc" tabindex="0" hidden>
+          <div class="tool-intro">
+            <h2>Working capital assessment</h2>
+            <p>Estimate your operating cycle and working capital gap, and compare two methods Indian banks commonly use to size fund-based limits.</p>
+          </div>
+          <form class="tool-inputs" data-calc="wc" onsubmit="return false">
+            <div class="field"><label for="wc-s">Projected annual sales (₹ crore)</label><input id="wc-s" name="s" type="number" min="0" step="0.1" value="150" inputmode="decimal"></div>
+            <div class="field"><label for="wc-c">Cost of goods sold (% of sales)</label><input id="wc-c" name="c" type="number" min="0" max="100" step="1" value="72"></div>
+            <div class="field"><label for="wc-i">Inventory holding (days of COGS)</label><input id="wc-i" name="i" type="number" min="0" step="1" value="60"></div>
+            <div class="field"><label for="wc-r">Receivable days (of sales)</label><input id="wc-r" name="r" type="number" min="0" step="1" value="75"></div>
+            <div class="field"><label for="wc-p">Payable days (of COGS)</label><input id="wc-p" name="p" type="number" min="0" step="1" value="45"></div>
+            <div class="field"><label for="wc-oca">Other current assets (₹ crore)</label><input id="wc-oca" name="oca" type="number" min="0" step="0.1" value="4" inputmode="decimal"></div>
+            <div class="field"><label for="wc-ocl">Other current liabilities, excluding bank borrowings (₹ crore)</label><input id="wc-ocl" name="ocl" type="number" min="0" step="0.1" value="3" inputmode="decimal"></div>
+          </form>
+          <div class="tool-results" aria-live="polite" id="wc-out"></div>
+        </div>
+
+        <div class="notice" style="margin-top:48px">
+          <p><strong>These are estimates, not offers.</strong> Lenders also consider your credit history, security, promoter contribution, sector, group exposure and their own policies. Results are indicative and are not financial advice. Use them as a starting point for a discussion.</p>
+        </div>
+        <p style="margin-top:24px"><a class="btn" href="index.html#contact" data-book>Discuss your numbers with us</a></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div class="footer-brand"><img src="assets/compass-mark.svg" alt="" width="16" height="27"><span>AK Advisors and Consultants</span></div>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="index.html#services">Services</a><a href="markets.html">Rates &amp; News</a><a href="tools.html">Tools</a><a href="resources.html">Resources</a><a href="index.html#contact">Contact</a>
+      </nav>
+      <p class="footer-contact"><a href="mailto:queries@akadvisors.in">queries@akadvisors.in</a> <span aria-hidden="true">·</span> <a href="tel:+919871588733">+91 98715 88733</a></p>
+      <p class="footer-legal">AK Advisors arranges debt on behalf of borrowers under an agreed mandate and is paid by the borrower. We do not lend or handle client funds. Lenders make their own decisions on approval, terms and timing. Nothing on this site is an offer of credit.</p>
+      <p class="footer-copy">© <span id="year">2026</span> AK Advisors and Consultants</p>
+    </div>
+  </footer>
+
+  <script src="site.js" defer></script>
+  <script src="tools.js" defer></script>
+</body>
+</html>

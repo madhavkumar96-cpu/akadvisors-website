@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en-IN" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <script>document.documentElement.classList.remove("no-js");</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MCLR, repo rate and debt news in India | AK Advisors and Consultants</title>
+  <meta name="description" content="Latest RBI repo rate, SBI MCLR and EBLR, MCLR history since 2016, savings versus borrowing rates in India, India against global benchmarks, and recent news on debt and lending in India.">
+  <link rel="canonical" href="https://akadvisors.in/markets.html">
+  <meta name="theme-color" content="#1D2730">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="AK Advisors and Consultants">
+  <meta property="og:title" content="Rates, benchmarks and debt news in India">
+  <meta property="og:description" content="Repo rate, MCLR history, India against the world, and recent debt news.">
+  <meta property="og:url" content="https://akadvisors.in/markets.html">
+  <meta property="og:locale" content="en_IN">
+  <link rel="icon" type="image/svg+xml" href="assets/compass-mark.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html" aria-label="AK Advisors and Consultants, home">
+        <img src="assets/compass-mark.svg" alt="" width="20" height="34">
+        <span class="brand-text"><span class="brand-name">AK Advisors</span><span class="brand-sub">and Consultants</span></span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="nav-toggle-bars" aria-hidden="true"></span><span class="visually-hidden">Menu</span>
+      </button>
+      <nav class="site-nav" id="site-nav" aria-label="Primary">
+        <ul>
+          <li><a href="index.html#services">Services</a></li>
+          <li><a href="index.html#approach">Our Approach</a></li>
+          <li><a href="index.html#partners">Partners</a></li>
+          <li><a href="markets.html" aria-current="page">Rates &amp; News</a></li>
+          <li><a href="tools.html">Tools</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+        <a class="btn btn-small" href="index.html#contact" data-book>Book a discussion</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="page-hero" aria-labelledby="page-title">
+      <div class="wrap">
+        <p class="crumbs"><a href="index.html">Home</a> / Rates &amp; News</p>
+        <h1 id="page-title">Rates, benchmarks and debt news</h1>
+        <p class="lede">The benchmarks Indian lenders price loans against, how they have moved since 2016, and recent news that affects borrowers.</p>
+        <p class="asof-line">Data as of <strong data-asof>23 November 2026</strong>. Each figure links to its source.</p>
+        <ul class="subnav">
+          <li><a href="#policy">Policy and lending rates</a></li>
+          <li><a href="#history">MCLR history</a></li>
+          <li><a href="#ladder">Savings vs borrowing</a></li>
+          <li><a href="#world">India and the world</a></li>
+          <li data-deals-link hidden><a href="#deals">Recent deals</a></li>
+          <li><a href="#news">Debt news</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Policy and lending rates -->
+    <section class="section" id="policy" aria-labelledby="policy-title">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="eyebrow">Policy and lending rates</p>
+          <h2 id="policy-title">Where rates stand today</h2>
+          <p class="section-intro" id="policy-intro">The RBI raised the repo rate by 25 bps on 7 October 2026 and moved its stance to calibrated tightening. Banks have since been raising lending benchmarks.</p>
+        </header>
+
+        <div class="rate-tiles" id="rbi-tiles"></div>
+        <p class="source-line" id="rbi-source"></p>
+
+        <div class="grid-2" style="margin-top:40px">
+          <div class="card">
+            <h3>SBI MCLR by tenor</h3>
+            <p id="mclr-effective"></p>
+            <div class="table-scroll" tabindex="0" role="region" aria-label="SBI MCLR by tenor">
+              <table id="mclr-table">
+                <thead><tr><th scope="col">Tenor</th><th scope="col" class="num">MCLR</th></tr></thead>
+                <tbody></tbody>
+              </table>
+            </div>
+            <p class="source-line" id="mclr-source"></p>
+          </div>
+          <div class="card">
+            <h3>External benchmark rates (SBI)</h3>
+            <p>Most new MSME and retail floating-rate loans are linked to an external benchmark, usually the repo rate.</p>
+            <table>
+              <tbody id="eblr-table"></tbody>
+            </table>
+            <p class="source-line" id="eblr-source"></p>
+            <p class="tool-note">CRP is the credit risk premium and BSP the business strategy premium. Both are set by the lender for each borrower.</p>
+          </div>
+        </div>
+
+        <div class="grid-3" style="margin-top:24px">
+          <div class="card">
+            <h3>Repo rate</h3>
+            <p>The rate at which the RBI lends to banks overnight. Changes flow into external-benchmark loans at their next reset, usually within three months.</p>
+          </div>
+          <div class="card">
+            <h3>MCLR</h3>
+            <p>Each bank's internal benchmark, based on its marginal cost of funds. A loan priced at MCLR plus a spread resets on the date set in the sanction, often every 6 or 12 months.</p>
+          </div>
+          <div class="card">
+            <h3>What it means for you</h3>
+            <p>Check your benchmark and reset dates. After a policy rate rise, a borrower on a 1-year MCLR reset may not see the change for months, while a repo-linked loan moves sooner.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MCLR history -->
+    <section class="section section-tint" id="history" aria-labelledby="history-title">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="eyebrow">History</p>
+          <h2 id="history-title">SBI MCLR against the repo rate since 2016</h2>
+          <p class="section-intro">The gap between a bank's MCLR and the repo rate shows how much of a policy change has reached loan pricing.</p>
+        </header>
+
+        <div class="card">
+          <div class="chart-controls">
+            <div class="seg" role="group" aria-label="MCLR tenor" id="tenor-seg">
+              <button type="button" data-tenor="0" aria-pressed="false">Overnight</button>
+              <button type="button" data-tenor="3" aria-pressed="false">6 months</button>
+              <button type="button" data-tenor="4" aria-pressed="true">1 year</button>
+              <button type="button" data-tenor="6" aria-pressed="false">3 years</button>
+            </div>
+            <div class="seg" role="group" aria-label="Period" id="period-seg">
+              <button type="button" data-years="0" aria-pressed="true">Since 2016</button>
+              <button type="button" data-years="5" aria-pressed="false">5 years</button>
+              <button type="button" data-years="2" aria-pressed="false">2 years</button>
+            </div>
+          </div>
+          <div class="legend" aria-hidden="true"><span class="l1" id="legend-mclr">SBI 1-year MCLR</span><span class="l2">RBI repo rate</span><span class="l3">Spread</span></div>
+          <div class="chart-wrap" id="history-chart"></div>
+          <p class="chart-summary" id="history-summary"></p>
+          <details class="data-table">
+            <summary>Show the data as a table</summary>
+            <div class="table-scroll" tabindex="0" role="region" aria-label="SBI MCLR history table">
+              <table id="history-table"><thead></thead><tbody></tbody></table>
+            </div>
+          </details>
+          <p class="source-line" id="history-source"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Savings vs borrowing -->
+    <section class="section" id="ladder" aria-labelledby="ladder-title">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="eyebrow">Savings vs borrowing</p>
+          <h2 id="ladder-title">What savers earn and what borrowers pay in India</h2>
+          <p class="section-intro">Deposit rates sit below the policy rate and lending benchmarks sit above it. Your final loan rate adds a spread for credit risk on top of the benchmark.</p>
+        </header>
+        <div class="card">
+          <ul class="ladder" id="rate-ladder"></ul>
+          <div class="ladder-axis" aria-hidden="true"><span></span><div><span>0%</span><span>2%</span><span>4%</span><span>6%</span><span>8%</span><span>10%</span><span>12%</span></div><span></span></div>
+          <p class="source-line">Bar shows the range across banks. Sources: <a href="https://www.rbi.org.in/" rel="noopener">RBI current rates</a>, <a href="https://sbi.bank.in/web/interest-rates/interest-rates/mclr" rel="noopener">SBI</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- India and the world -->
+    <section class="section section-tint" id="world" aria-labelledby="world-title">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="eyebrow">India and the world</p>
+          <h2 id="world-title">How India compares</h2>
+          <p class="section-intro">India saves a large share of its income but lends less to the private sector, relative to GDP, than most large economies. That gap explains why bank credit for mid-sized companies is still relatively scarce.</p>
+        </header>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Policy rates</h3>
+            <p id="policy-world-asof"></p>
+            <ul class="hbars" id="world-policy"></ul>
+            <p class="source-line" id="world-policy-source"></p>
+          </div>
+          <div class="card">
+            <h3>Savings and private credit, % of GDP</h3>
+            <p>Gross domestic savings compared with domestic credit to the private sector. Latest year available for each country.</p>
+            <div class="pair-legend" aria-hidden="true"><span><i style="background:#1D2730"></i>Gross domestic savings</span><span><i style="background:#9AA9B5"></i>Private sector credit</span></div>
+            <ul class="hbars pairs" id="world-savings"></ul>
+            <p class="source-line" id="world-savings-source"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recent deals (filled from data/deals.js; hidden while empty) -->
+    <section class="section section-tint" id="deals" aria-labelledby="deals-title" hidden>
+      <div class="wrap">
+        <header class="section-head">
+          <p class="eyebrow">Market activity</p>
+          <h2 id="deals-title">Recent loans and debt deals in India</h2>
+          <p class="section-intro">Recent loans and debt financings in the Indian market, to show which lenders are active, in which sectors and at what size.</p>
+        </header>
+        <div class="snapshot deal-stats" id="deal-stats" aria-label="Deal summary"></div>
+        <div class="deal-filters">
+          <div class="seg" role="group" aria-label="Filter by facility" id="deal-facility"></div>
+          <div class="seg" role="group" aria-label="Filter by lender type" id="deal-lender"></div>
+          <label class="deal-search"><span class="visually-hidden">Search deals</span><input type="search" id="deal-q" placeholder="Search borrower, lender or sector"></label>
+        </div>
+        <p class="check-progress" id="deal-count" aria-live="polite"></p>
+        <div class="card" style="padding:0">
+          <div class="table-scroll" tabindex="0" role="region" aria-label="Recent debt deals">
+            <table class="deals-table">
+              <caption class="visually-hidden">Recent debt deals in India</caption>
+              <thead><tr>
+                <th scope="col"><button type="button" data-sort="date" aria-label="Sort by date">Date</button></th>
+                <th scope="col">Borrower</th>
+                <th scope="col">Facility</th>
+                <th scope="col">Lender(s)</th>
+                <th scope="col" class="num"><button type="button" data-sort="amountCr" aria-label="Sort by amount">Amount</button></th>
+                <th scope="col">Tenor / pricing</th>
+              </tr></thead>
+              <tbody id="deal-rows"></tbody>
+            </table>
+          </div>
+        </div>
+        <p class="source-line" id="deal-source"></p>
+        <p class="tool-note">AK Advisors was not involved in these transactions. Listed for market information only. Terms shown are as reported and may be incomplete.</p>
+      </div>
+    </section>
+
+    <!-- News -->
+    <section class="section" id="news" aria-labelledby="news-title">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="eyebrow">News</p>
+          <h2 id="news-title">Debt and lending news in India</h2>
+          <p class="section-intro">A short, curated summary of developments that affect borrowers. Each item links to its source.</p>
+        </header>
+        <div class="seg news-filters" role="group" aria-label="Filter news" id="news-filter"></div>
+        <ol class="news-list" id="news-list"></ol>
+      </div>
+    </section>
+
+    <section class="section section-tint" aria-labelledby="method-title">
+      <div class="wrap">
+        <h2 id="method-title" style="font-size:22px;margin-bottom:12px">Sources and method</h2>
+        <p class="section-intro" style="font-size:15px;max-width:60em">Policy rates are from the Reserve Bank of India, and MCLR and EBLR from State Bank of India's published tables. Global figures come from the World Bank's World Development Indicators and central bank announcements. News items summarise public reports. Figures are for information only and are not an offer or a quote. Your loan rate depends on your lender's assessment.</p>
+        <p style="margin-top:20px"><a class="btn" href="index.html#contact" data-book>Book a confidential financing discussion</a></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div class="footer-brand"><img src="assets/compass-mark.svg" alt="" width="16" height="27"><span>AK Advisors and Consultants</span></div>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="index.html#services">Services</a><a href="markets.html">Rates &amp; News</a><a href="tools.html">Tools</a><a href="resources.html">Resources</a><a href="index.html#contact">Contact</a>
+      </nav>
+      <p class="footer-contact"><a href="mailto:queries@akadvisors.in">queries@akadvisors.in</a> <span aria-hidden="true">·</span> <a href="tel:+919871588733">+91 98715 88733</a></p>
+      <p class="footer-legal">AK Advisors arranges debt on behalf of borrowers under an agreed mandate and is paid by the borrower. We do not lend or handle client funds. Lenders make their own decisions on approval, terms and timing. Nothing on this site is an offer of credit.</p>
+      <p class="footer-copy">© <span id="year">2026</span> AK Advisors and Consultants</p>
+    </div>
+  </footer>
+
+  <script src="data/market-data.js" defer></script>
+  <script src="data/deals.js" defer></script>
+  <script src="site.js" defer></script>
+  <script src="markets.js" defer></script>
+</body>
+</html>
