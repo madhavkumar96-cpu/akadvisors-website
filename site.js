@@ -8,7 +8,7 @@
    ================================================================== */
 var AK_CONFIG = {
   formEndpoint: "web3forms",  // "web3forms" (GitHub Pages) | "netlify" | "send.php" (cPanel) | "" = WhatsApp/email only
-  web3formsKey: "",           // access key emailed by web3forms.com to queries@akadvisors.in (safe to be public)
+  web3formsKey: "69e90a33-f31a-4fb2-8a40-db3fc9ed40e4",           // access key emailed by web3forms.com to queries@akadvisors.in (safe to be public)
   email: "queries@akadvisors.in",
   phoneDisplay: "+91 98715 88733",
   phoneE164: "+919871588733",
