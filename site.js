@@ -261,7 +261,7 @@ var AK_CONFIG = {
           .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { if (!r.ok || !j.ok) throw new Error(r.status); }); });
       }
       req
-        .then(function () { f.reset(); show(f, "thanks"); })
+        .then(function () { status.textContent = ""; f.reset(); show(f, "thanks"); })
         .catch(fallback)   // server unavailable (e.g. local preview): let the visitor send by WhatsApp or email
         .finally(function () { btn.disabled = false; btn.removeAttribute("aria-busy"); });
     });
