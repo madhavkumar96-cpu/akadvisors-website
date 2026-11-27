@@ -1123,3 +1123,19 @@ details.other-services[open] .os-body { animation: os-in .45s cubic-bezier(.2,.7
 .strengths .card h3 { font-family: var(--serif); font-weight: 500; font-size: 24px; }
 .lender-note { font-size: 15px; color: var(--muted); }
 .lender-note a { color: var(--charcoal); }
+
+/* Partner portraits */
+.partner { display: grid; grid-template-columns: 168px 1fr; column-gap: 28px; align-items: start; }
+.partner-photo { grid-row: span 3; width: 168px; height: 200px; object-fit: cover; object-position: 50% 22%; border-radius: 2px; background: var(--grey); filter: grayscale(.15) contrast(1.02); transition: filter .4s ease, transform .6s cubic-bezier(.2,.7,.2,1); box-shadow: 0 16px 34px -20px rgba(29,39,48,.45); }
+.partner:hover .partner-photo { filter: none; }
+.partner h3, .partner .partner-role, .partner p { grid-column: 2; }
+@media (max-width: 900px) and (min-width: 721px) { .partner { grid-template-columns: 120px 1fr; } .partner-photo { width: 120px; height: 144px; } }
+@media (max-width: 720px) {
+  .partner { grid-template-columns: 96px 1fr; column-gap: 18px; }
+  .partner-photo { width: 96px; height: 116px; grid-row: span 2; }
+  .partner p:last-child { grid-column: 1 / -1; margin-top: 12px; }
+}
+.partner { grid-template-rows: auto auto 1fr; }
+.partner h3 { align-self: end; }
+.partner .partner-role { margin: 6px 0 12px; }
+@media (max-width: 720px) { .partner { grid-template-rows: auto auto auto; } .partner h3 { align-self: end; } }
