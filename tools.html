@@ -42,12 +42,13 @@
           <li><a href="resources.html">Resources</a></li>
           <li><a href="index.html#contact">Contact</a></li>
         </ul>
-        <a class="btn btn-small" href="index.html#contact" data-book>Book a discussion</a>
+        <a class="btn btn-small" href="index.html#contact" data-book>Request a callback</a>
       </nav>
     </div>
   </header>
 
   <main id="main">
+    <div class="print-only print-head" aria-hidden="true"><strong>AK Advisors and Consultants</strong> · <span id="print-tool"></span> · <span id="print-date"></span><br>Indicative estimate based on the inputs shown. Not an offer of credit or financial advice. Lenders apply their own assessment.</div>
     <section class="page-hero" aria-labelledby="page-title">
       <div class="wrap">
         <p class="crumbs"><a href="index.html">Home</a> / Tools</p>
@@ -82,6 +83,10 @@
             <div class="field"><label for="emi-t">Repayment type</label><select id="emi-t" name="t"><option value="emi">Equated instalments (EMI)</option><option value="epi">Equal principal instalments</option></select></div>
           </form>
           <div class="tool-results" aria-live="polite" id="emi-out"></div>
+          <div class="tool-next">
+            <div><p class="tool-next-title">Next steps</p><ul><li><a href="resources.html?docs=term#documents">Documents for a term loan</a></li><li><a href="templates/AK_Financing_Workbook.xlsx" download>Financing workbook: project cost and repayment sheets (Excel)</a></li><li><a href="tools.html#cap">Check how much you can borrow</a></li></ul></div>
+            <button type="button" class="btn btn-outline btn-small" data-print="emi">Print or save as PDF</button>
+          </div>
         </div>
 
         <!-- ============ CAPACITY ============ -->
@@ -101,6 +106,10 @@
             <div class="field"><label for="cap-lev">Maximum debt to EBITDA</label><div class="range-row"><input id="cap-lev" name="lev" type="range" min="1.5" max="6" step="0.25" value="3.5"><output for="cap-lev">3.50x</output></div></div>
           </form>
           <div class="tool-results" aria-live="polite" id="cap-out"></div>
+          <div class="tool-next">
+            <div><p class="tool-next-title">Next steps</p><ul><li><a href="resources.html?docs=common#documents">What every lender will ask for</a></li><li><a href="tools.html#risk">Stress-test the new debt</a></li><li><a href="templates/AK_Financing_Workbook.xlsx" download>Financing workbook: existing debt and DSCR sheets (Excel)</a></li></ul></div>
+            <button type="button" class="btn btn-outline btn-small" data-print="cap">Print or save as PDF</button>
+          </div>
         </div>
 
         <!-- ============ REFINANCING ============ -->
@@ -119,6 +128,10 @@
             <div class="field"><label for="rf-x">Other one-time costs: stamp duty, legal, valuation, charge creation (₹ lakh)</label><input id="rf-x" name="x" type="number" min="0" step="1" value="15" inputmode="decimal"></div>
           </form>
           <div class="tool-results" aria-live="polite" id="refi-out"></div>
+          <div class="tool-next">
+            <div><p class="tool-next-title">Next steps</p><ul><li><a href="resources.html?docs=refi#documents">Documents for refinancing</a></li><li><a href="templates/AK_Financing_Workbook.xlsx" download>Compare lender offers side by side: Lender comparison sheet (Excel)</a></li><li><a href="markets.html#policy">Today’s benchmark rates</a></li></ul></div>
+            <button type="button" class="btn btn-outline btn-small" data-print="refi">Print or save as PDF</button>
+          </div>
         </div>
 
         <!-- ============ STRESS TEST ============ -->
@@ -136,6 +149,10 @@
             <div class="field"><label for="rk-c">DSCR covenant</label><div class="range-row"><input id="rk-c" name="c" type="range" min="1" max="1.75" step="0.05" value="1.25"><output for="rk-c">1.25x</output></div></div>
           </form>
           <div class="tool-results" aria-live="polite" id="risk-out"></div>
+          <div class="tool-next">
+            <div><p class="tool-next-title">Next steps</p><ul><li><a href="resources.html?docs=common#documents">Borrower checklist: what lenders will ask for</a></li><li><a href="tools.html#cap">Check borrowing capacity</a></li><li><a href="templates/AK_Financing_Workbook.xlsx" download>Financing workbook: repayment and DSCR sheet (Excel)</a></li></ul></div>
+            <button type="button" class="btn btn-outline btn-small" data-print="risk">Print or save as PDF</button>
+          </div>
         </div>
 
         <!-- ============ WORKING CAPITAL ============ -->
@@ -154,12 +171,16 @@
             <div class="field"><label for="wc-ocl">Other current liabilities, excluding bank borrowings (₹ crore)</label><input id="wc-ocl" name="ocl" type="number" min="0" step="0.1" value="3" inputmode="decimal"></div>
           </form>
           <div class="tool-results" aria-live="polite" id="wc-out"></div>
+          <div class="tool-next">
+            <div><p class="tool-next-title">Next steps</p><ul><li><a href="resources.html?docs=wc#documents">Documents for working capital</a></li><li><a href="templates/AK_Financing_Workbook.xlsx" download>Financing workbook: working capital sheet (Excel)</a></li><li><a href="markets.html#ladder">Savings vs borrowing rates</a></li></ul></div>
+            <button type="button" class="btn btn-outline btn-small" data-print="wc">Print or save as PDF</button>
+          </div>
         </div>
 
         <div class="notice" style="margin-top:48px">
           <p><strong>These are estimates, not offers.</strong> Lenders also consider your credit history, security, promoter contribution, sector, group exposure and their own policies. Results are indicative and are not financial advice. Use them as a starting point for a discussion.</p>
         </div>
-        <p style="margin-top:24px"><a class="btn" href="index.html#contact" data-book>Discuss your numbers with us</a></p>
+        <p style="margin-top:24px"><a class="btn" href="index.html#contact" data-book>Request a confidential callback</a></p>
       </div>
     </section>
   </main>
@@ -168,7 +189,7 @@
     <div class="wrap footer-inner">
       <div class="footer-brand"><img src="assets/compass-mark.svg" alt="" width="16" height="27"><span>AK Advisors and Consultants</span></div>
       <nav class="footer-nav" aria-label="Footer">
-        <a href="index.html#services">Services</a><a href="markets.html">Rates &amp; News</a><a href="tools.html">Tools</a><a href="resources.html">Resources</a><a href="index.html#contact">Contact</a>
+        <a href="index.html#services">Services</a><a href="markets.html">Rates &amp; News</a><a href="tools.html">Tools</a><a href="resources.html">Resources</a><a href="index.html#contact">Contact</a><a href="privacy.html">Privacy</a>
       </nav>
       <p class="footer-contact"><a href="mailto:queries@akadvisors.in">queries@akadvisors.in</a> <span aria-hidden="true">·</span> <a href="tel:+919871588733">+91 98715 88733</a></p>
       <p class="footer-legal">AK Advisors arranges debt on behalf of borrowers under an agreed mandate and is paid by the borrower. We do not lend or handle client funds. Lenders make their own decisions on approval, terms and timing. Nothing on this site is an offer of credit.</p>

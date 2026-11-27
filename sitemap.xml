@@ -4,4 +4,5 @@
   <url><loc>https://akadvisors.in/markets.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://akadvisors.in/tools.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://akadvisors.in/resources.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://akadvisors.in/privacy.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
 </urlset>

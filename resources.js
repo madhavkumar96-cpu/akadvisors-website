@@ -23,6 +23,24 @@
     }).join("") + "</div>";
   }).join("");
 
+  /* Related calculators and templates beside each checklist */
+  var W = "templates/AK_Financing_Workbook.xlsx";
+  var related = {
+    common: [["tools.html#cap", "Borrowing capacity calculator"], ["tools.html#risk", "DSCR stress test"], [W, "Financing workbook (Excel)"], ["templates/AK_Borrower_Information_Sheet.docx", "Borrower information sheet (Word)"]],
+    term: [["tools.html#emi", "EMI and repayment calculator"], ["tools.html#cap", "Borrowing capacity calculator"], [W, "Financing workbook: project cost sheet"], ["templates/AK_Information_Memorandum_Outline.docx", "Information memorandum outline"]],
+    wc: [["tools.html#wc", "Working capital calculator"], [W, "Financing workbook: working capital sheet"], ["templates/AK_Loan_Request_Cover_Letter.docx", "Loan request cover letter"]],
+    refi: [["tools.html#refi", "Refinancing cost and break-even"], [W, "Financing workbook: existing debt and lender comparison sheets"], ["markets.html#policy", "Today’s benchmark rates"]]
+  };
+  lists.querySelectorAll(".doc-list").forEach(function (d) {
+    var rel = related[d.getAttribute("data-id")] || [];
+    var box = document.createElement("aside");
+    box.className = "related";
+    box.innerHTML = '<p class="tool-next-title">Do this next</p><ul>' + rel.map(function (r) {
+      return '<li><a href="' + r[0] + '"' + (/\.(xlsx|docx)$/.test(r[0]) ? " download" : "") + ">" + esc(r[1]) + "</a></li>";
+    }).join("") + "</ul>";
+    d.insertBefore(box, d.firstChild);
+  });
+
   function current() { return lists.querySelector(".doc-list:not([hidden])"); }
   function updateProgress() {
     var box = current(), all = box.querySelectorAll("input"), done = box.querySelectorAll("input:checked");
@@ -40,4 +58,11 @@
     persist(); updateProgress();
   });
   updateProgress();
+
+  /* Deep link: resources.html?docs=refi */
+  var want = new URLSearchParams(location.search).get("docs");
+  if (want) {
+    var btn = tabs.querySelector('button[data-id="' + want + '"]');
+    if (btn) btn.click();
+  }
 })();

@@ -65,6 +65,11 @@ var AK_CONFIG = {
       mpc: D.rbi.nextMpc,
       asof: D.asOf
     };
+    if (D.asOfISO) {
+      var ageDays = Math.floor((Date.now() - new Date(D.asOfISO + "T00:00:00+05:30").getTime()) / 86400000);
+      if (ageDays > (D.reviewEveryDays || 14)) document.documentElement.classList.add("is-stale");
+      document.querySelectorAll("[data-stale-age]").forEach(function (el) { el.textContent = ageDays; });
+    }
     document.querySelectorAll("[data-snap]").forEach(function (el) {
       var k = el.getAttribute("data-snap");
       if (vals[k]) el.textContent = vals[k];
@@ -94,10 +99,10 @@ var AK_CONFIG = {
     var f = document.createElement("form");
     f.className = "enquiry";
     f.noValidate = true;
-    f.setAttribute("aria-label", "Book a confidential financing discussion");
+    f.setAttribute("aria-label", "Request a confidential callback");
     f.innerHTML =
       '<div class="form-step" data-step="form">' +
-        (context === "dialog" ? "" : '<h3>Request a call back</h3><p class="form-sub">Tell us what you need. A partner will call you to arrange a confidential discussion.</p>') +
+        (context === "dialog" ? "" : '<h3>Request a confidential callback</h3><p class="form-sub">Tell us what you need. A partner will call you to arrange a confidential discussion.</p>') +
         '<div class="field-row">' +
           field(p, "name", "Full name", '<input id="' + p + 'name" name="name" type="text" autocomplete="name" required>') +
           field(p, "company", "Company", '<input id="' + p + 'company" name="company" type="text" autocomplete="organization" required>') +
@@ -116,9 +121,9 @@ var AK_CONFIG = {
         field(p, "call_time", "Best time to call", '<select id="' + p + 'call_time" name="call_time">' + opts(C.callTimes) + "</select>") +
         "</details>" +
         '<div class="hp" aria-hidden="true"><label for="' + p + 'web">Website</label><input id="' + p + 'web" name="_gotcha" type="text" tabindex="-1" autocomplete="off"></div>' +
-        '<div class="field field-check"><input id="' + p + 'consent" name="consent" type="checkbox" required><label for="' + p + 'consent">I agree to be contacted by AK Advisors about this enquiry.</label></div>' +
+        '<div class="field field-check"><input id="' + p + 'consent" name="consent" type="checkbox" required><label for="' + p + 'consent">I agree to be contacted by AK Advisors about this enquiry. <a href="privacy.html" target="_blank" rel="noopener">How we use your details</a></label></div>' +
         '<p class="form-hint">Please do not include financial statements, ID or banking details. If documents are needed, we will share a secure upload link.</p>' +
-        '<button class="btn btn-block" type="submit">Request a call back</button>' +
+        '<button class="btn btn-block" type="submit">Request a confidential callback</button>' +
         '<p class="form-status" role="status" aria-live="polite"></p>' +
       "</div>" +
       '<div class="form-step form-done" data-step="send" hidden tabindex="-1">' +
@@ -283,7 +288,7 @@ var AK_CONFIG = {
     dialog.className = "book-dialog";
     dialog.setAttribute("aria-labelledby", "book-title");
     dialog.innerHTML =
-      '<div class="book-head"><div><p class="eyebrow">Confidential</p><h2 id="book-title">Book a financing discussion</h2>' +
+      '<div class="book-head"><div><p class="eyebrow">Confidential</p><h2 id="book-title">Request a confidential callback</h2>' +
       '<p class="form-sub">Share a few details and a partner will call you back.</p></div>' +
       '<button type="button" class="book-close" aria-label="Close"><span aria-hidden="true">×</span></button></div>';
     dialog.appendChild(buildForm("dialog"));
@@ -312,7 +317,7 @@ var AK_CONFIG = {
   bar.setAttribute("role", "region");
   bar.setAttribute("aria-label", "Quick contact");
   bar.innerHTML =
-    '<a class="btn mobile-cta-book" href="' + (mount ? "#contact" : "index.html#contact") + '" data-book>Book a discussion</a>' +
+    '<a class="btn mobile-cta-book" href="' + (mount ? "#contact" : "index.html#contact") + '" data-book>Request a callback</a>' +
     '<a class="mobile-cta-icon" href="tel:' + C.phoneE164 + '" aria-label="Call ' + C.phoneDisplay + '">' +
       '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></a>' +
     '<a class="mobile-cta-icon" href="https://wa.me/' + C.whatsapp + '" target="_blank" rel="noopener" aria-label="Message us on WhatsApp">' +

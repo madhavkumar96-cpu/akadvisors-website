@@ -199,6 +199,22 @@
       if (j !== null) { e.preventDefault(); select(tabs[j], true); }
     });
   });
+  window.addEventListener("hashchange", function () {
+    var hh = location.hash.replace("#", "");
+    var tt = tabs.filter(function (t) { return t.getAttribute("aria-controls") === "tool-" + hh; })[0];
+    if (tt) { select(tt, false); tt.scrollIntoView({ block: "center" }); }
+  });
+
+  /* ---------- Print a single calculator ---------- */
+  document.querySelectorAll("[data-print]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var panel = document.getElementById("tool-" + b.getAttribute("data-print"));
+      document.getElementById("print-tool").textContent = panel.querySelector("h2").textContent;
+      document.getElementById("print-date").textContent = new Date().toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" });
+      window.print();
+    });
+  });
+
   var h = location.hash.replace("#", "");
   var initial = tabs.filter(function (t) { return t.getAttribute("aria-controls") === "tool-" + h; })[0];
   if (initial) select(initial, false);
