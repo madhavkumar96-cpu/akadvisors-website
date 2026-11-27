@@ -2,7 +2,7 @@
 <html lang="en-IN" class="no-js">
 <head>
   <meta charset="utf-8">
-  <script>document.documentElement.classList.remove("no-js");</script>
+  <script>document.documentElement.classList.remove("no-js");if(!matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.classList.add("motion-pending");setTimeout(function(){document.documentElement.classList.remove("motion-pending")},2500);}</script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- ============ SEO — edit title, description and canonical URL here ============ -->
@@ -24,7 +24,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 
   <!-- Structured data: no physical address by design -->
@@ -111,7 +111,7 @@
 }
   </script>
 </head>
-<body>
+<body class="dark-top">
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header" id="top">
@@ -164,14 +164,22 @@
             <li><strong>Experienced partners</strong><span>40+ years in finance and CFO roles; deal advisory at KPMG India and EY-Parthenon</span></li>
           </ul>
         </div>
+        <a class="scroll-cue" href="#services" aria-label="Scroll to services"><span></span></a>
         <div class="hero-art">
           <img src="assets/compass.png" alt="AK Advisors compass emblem" width="512" height="932">
         </div>
       </div>
     </section>
 
+    <!-- ============ STATEMENT ============ -->
+    <section class="statement section-dark" aria-label="How we work, in brief">
+      <div class="wrap">
+        <p class="statement-text">We act only for the borrower. We build your financing case the way a credit committee reads it, approach only the lenders you approve, and help you compare every term through to funding.</p>
+      </div>
+    </section>
+
     <!-- ============ 2. SERVICES ============ -->
-    <section class="section" id="services" aria-labelledby="services-title">
+    <section class="section section-dark" id="services" aria-labelledby="services-title">
       <div class="wrap">
         <header class="section-head">
           <p class="eyebrow">Services</p>
@@ -510,5 +518,11 @@
 
   <script src="data/market-data.js" defer></script>
   <script src="site.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
+  <script src="motion.js" defer></script>
+  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+  <script type="module" src="hero3d.js"></script>
 </body>
 </html>
