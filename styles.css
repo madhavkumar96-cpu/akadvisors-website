@@ -1139,3 +1139,41 @@ details.other-services[open] .os-body { animation: os-in .45s cubic-bezier(.2,.7
 .partner h3 { align-self: end; }
 .partner .partner-role { margin: 6px 0 12px; }
 @media (max-width: 720px) { .partner { grid-template-rows: auto auto auto; } .partner h3 { align-self: end; } }
+
+/* ==================================================================
+   Audit fixes (27 Nov 2026)
+   ================================================================== */
+/* Contrast: brighter brass for small text on dark; darker third fee tranche */
+:root { --gold-on-dark: #C9A46C; }
+.section-dark .service-num, .section-dark .svc-label, .hero .eyebrow::before, .section-dark .eyebrow::before, .page-hero .eyebrow::before { color: var(--gold-on-dark); }
+.fee-seg:nth-child(3) { background: #556776; }
+
+/* Tap targets of at least 44px on touch screens */
+@media (pointer: coarse), (max-width: 760px) {
+  .footer-nav a, .footer-contact a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 4px; }
+  .contact-links a { display: inline-flex; align-items: center; min-height: 44px; }
+  .hero .text-link { display: inline-flex; align-items: center; min-height: 44px; }
+  .brand { min-height: 44px; }
+  .field-check label { padding: 4px 0; }
+  .field-check label a { display: inline-block; padding: 8px 0; }
+}
+
+/* Inline call to action links between sections */
+.inline-cta { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; }
+.inline-cta p { margin: 0; font-family: var(--serif); font-size: 22px; color: var(--charcoal); }
+.inline-cta a { font-weight: 600; color: var(--charcoal); text-decoration: underline; text-decoration-color: var(--gold); text-underline-offset: 6px; text-decoration-thickness: 2px; min-height: 44px; display: inline-flex; align-items: center; }
+.inline-cta a:hover { color: var(--slate); }
+
+/* Hero offer line */
+.hero-offer { margin: 18px 0 0; display: inline-flex; align-items: center; gap: 10px; font-size: 15px; color: #E8ECEF; }
+.hero-offer::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--gold-on-dark); box-shadow: 0 0 0 4px rgba(201,164,108,.18); }
+
+/* Response promise beside the form */
+.promise { display: flex; gap: 10px; align-items: flex-start; margin: 0 0 18px; padding: 12px 14px; background: var(--grey); border-left: 3px solid var(--gold); font-size: 15px; }
+.book-dialog .promise { margin: 0 0 6px; }
+
+/* Partner LinkedIn links (shown only when a URL is set) */
+.partner-links { grid-column: 2; margin: 0 0 10px; }
+.partner-links a { display: inline-flex; align-items: center; gap: 6px; min-height: 36px; font-size: 14px; font-weight: 500; color: var(--charcoal); text-decoration: none; border-bottom: 1px solid var(--gold); }
+.partner-links[hidden] { display: none; }
+.hero-art picture { display: contents; }

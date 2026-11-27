@@ -13,6 +13,10 @@ var AK_CONFIG = {
   phoneDisplay: "+91 98715 88733",
   phoneE164: "+919871588733",
   whatsapp: "919871588733",
+  // Analytics (cookie-less): set to your GoatCounter code, e.g. "akadvisors" for akadvisors.goatcounter.com
+  goatcounter: "",
+  // Partner LinkedIn profile URLs: links appear on the partner cards once set
+  linkedin: { anurag: "", madhav: "" },
   loanTypes: [
     "Term loan or capex funding",
     "Working capital limits",
@@ -105,9 +109,10 @@ var AK_CONFIG = {
     f.innerHTML =
       '<div class="form-step" data-step="form">' +
         (context === "dialog" ? "" : '<h3>Request a confidential callback</h3><p class="form-sub">Tell us what you need. A partner will call you to arrange a confidential discussion.</p>') +
+        '<p class="promise">A partner calls you within one business day. Your first one-page view of what is fundable is free.</p>' +
         '<div class="field-row">' +
           field(p, "name", "Full name", '<input id="' + p + 'name" name="name" type="text" autocomplete="name" required>') +
-          field(p, "company", "Company", '<input id="' + p + 'company" name="company" type="text" autocomplete="organization" required>') +
+          field(p, "company", 'Company <span class="optional">(optional)</span>', '<input id="' + p + 'company" name="company" type="text" autocomplete="organization">') +
         "</div>" +
         '<div class="field-row">' +
           field(p, "mobile", "Mobile number", '<div class="input-prefix"><span aria-hidden="true">+91</span><input id="' + p + 'mobile" name="mobile" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="14" required aria-describedby="' + p + 'mobile-hint"></div><span class="field-hint" id="' + p + 'mobile-hint">10-digit Indian mobile number</span>') +
@@ -116,7 +121,7 @@ var AK_CONFIG = {
         field(p, "loan_type", "Loan requirement", '<select id="' + p + 'loan_type" name="loan_type" required>' + opts(C.loanTypes, "Select one") + "</select>") +
         '<div class="field-row">' +
           field(p, "amount", "Amount required", '<div class="amount-wrap"><span class="amount-rupee" aria-hidden="true">₹</span><input id="' + p + 'amount" name="amount" type="number" inputmode="decimal" min="0" step="any" required><select name="amount_unit" aria-label="Amount unit"><option>crore</option><option>lakh</option></select></div>') +
-          field(p, "timing", "When do you need it?", '<select id="' + p + 'timing" name="timing" required>' + opts(C.timings, "Select") + "</select>") +
+          field(p, "timing", 'When do you need it? <span class="optional">(optional)</span>', '<select id="' + p + 'timing" name="timing">' + opts(C.timings, "Select") + "</select>") +
         "</div>" +
         '<details class="more-details"><summary>Add more details <span class="optional">(optional)</span></summary>' +
         field(p, "details", "Brief details", '<textarea id="' + p + 'details" name="details" rows="3" maxlength="600" placeholder="Purpose of the funding, existing lenders, anything we should know"></textarea>') +
@@ -139,7 +144,7 @@ var AK_CONFIG = {
         '<button type="button" class="text-link link-btn" data-back>Edit details</button>' +
       "</div>" +
       '<div class="form-step form-done" data-step="thanks" hidden tabindex="-1">' +
-        "<h3>Thank you</h3><p>We have received your request and will call you to arrange a confidential discussion.</p>" +
+        "<h3>Thank you</h3><p>We have received your request. A partner will call you within one business day.</p>" +
       "</div>";
     wire(f);
     return f;
@@ -240,17 +245,17 @@ var AK_CONFIG = {
         var g = function (n) { var el = f.querySelector('[name="' + n + '"]'); return el ? el.value.trim() : ""; };
         var payload = {
           access_key: C.web3formsKey,
-          subject: "Website enquiry: " + g("company") + " (₹" + g("amount") + " " + g("amount_unit") + ")",
+          subject: "Website enquiry: " + (g("company") || g("name")) + " (₹" + g("amount") + " " + g("amount_unit") + ")",
           from_name: "AK Advisors website",
           replyto: g("email") || undefined,
           botcheck: g("_gotcha") ? true : "",
           "Name": g("name"),
-          "Company": g("company"),
+          "Company": g("company") || "(not given)",
           "Mobile": "+91 " + g("mobile").replace(/\D/g, "").slice(-10),
           "Email": g("email") || "(not given)",
           "Loan requirement": g("loan_type"),
           "Amount required": "₹" + g("amount") + " " + g("amount_unit"),
-          "Timing": g("timing"),
+          "Timing": g("timing") || "(not given)",
           "Details": g("details") || "(none)",
           "Best time to call": g("call_time") || "(not given)",
           "Consent to be contacted": f.querySelector('[name="consent"]').checked ? "Yes" : "No",
@@ -268,7 +273,7 @@ var AK_CONFIG = {
           .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { if (!r.ok || !j.ok) throw new Error(r.status); }); });
       }
       req
-        .then(function () { status.textContent = ""; f.reset(); show(f, "thanks"); })
+        .then(function () { status.textContent = ""; f.reset(); show(f, "thanks"); if (window.akTrack) window.akTrack("booking-submitted"); })
         .catch(fallback)   // server unavailable (e.g. local preview): let the visitor send by WhatsApp or email
         .finally(function () { btn.disabled = false; btn.removeAttribute("aria-busy"); });
     });
@@ -290,8 +295,8 @@ var AK_CONFIG = {
     dialog.className = "book-dialog";
     dialog.setAttribute("aria-labelledby", "book-title");
     dialog.innerHTML =
-      '<div class="book-head"><div><p class="eyebrow">Confidential</p><h2 id="book-title">Request a confidential callback</h2>' +
-      '<p class="form-sub">Share a few details and a partner will call you back.</p></div>' +
+      '<div class="book-head"><div><p class="eyebrow">Confidential</p><h2 id="book-title">Get your free fundability view</h2>' +
+      '<p class="form-sub">Share a few details and a partner will call you to arrange a confidential discussion.</p></div>' +
       '<button type="button" class="book-close" aria-label="Close"><span aria-hidden="true">×</span></button></div>';
     dialog.appendChild(buildForm("dialog"));
     document.body.appendChild(dialog);
@@ -319,7 +324,7 @@ var AK_CONFIG = {
   bar.setAttribute("role", "region");
   bar.setAttribute("aria-label", "Quick contact");
   bar.innerHTML =
-    '<a class="btn mobile-cta-book" href="' + (mount ? "#contact" : "index.html#contact") + '" data-book>Request a callback</a>' +
+    '<a class="btn mobile-cta-book" href="' + (mount ? "#contact" : "index.html#contact") + '" data-book>Free fundability view</a>' +
     '<a class="mobile-cta-icon" href="tel:' + C.phoneE164 + '" aria-label="Call ' + C.phoneDisplay + '">' +
       '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></a>' +
     '<a class="mobile-cta-icon" href="https://wa.me/' + C.whatsapp + '" target="_blank" rel="noopener" aria-label="Message us on WhatsApp">' +
@@ -336,6 +341,28 @@ var AK_CONFIG = {
     if (contactSec) io.observe(contactSec);
     if (footer) io.observe(footer);
   }
+
+  /* ---------- LinkedIn links on partner cards ---------- */
+  document.querySelectorAll("[data-linkedin]").forEach(function (el) {
+    var url = (C.linkedin || {})[el.getAttribute("data-linkedin")];
+    if (url) { el.querySelector("a").href = url; el.hidden = false; }
+  });
+
+  /* ---------- Cookie-less analytics (GoatCounter), only when configured ---------- */
+  window.akTrack = function (name) {
+    if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: name, title: name, event: true });
+  };
+  if (C.goatcounter) {
+    var gc = document.createElement("script");
+    gc.async = true; gc.src = "https://gc.zgo.at/count.js";
+    gc.setAttribute("data-goatcounter", "https://" + C.goatcounter + ".goatcounter.com/count");
+    document.head.appendChild(gc);
+    document.addEventListener("click", function (e) {
+      var a = e.target.closest("[data-book]"); if (a) window.akTrack("cta-click: " + a.textContent.trim().slice(0, 40));
+      var t = e.target.closest('a[href^="tel:"], a[href^="https://wa.me"], a[href^="mailto:"]'); if (t) window.akTrack("contact: " + t.getAttribute("href").split(":")[0].split("?")[0]);
+    });
+  }
+
   /* ---------- Wide tables: show a scroll cue above any table that overflows ---------- */
   function markScrollables() {
     document.querySelectorAll(".table-scroll").forEach(function (t) {
