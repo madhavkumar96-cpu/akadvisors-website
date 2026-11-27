@@ -7,6 +7,8 @@
 */
 window.AK_DATA = {
   asOf: "23 November 2026",
+  asOfISO: "2026-11-23",      // date the figures were last checked against sources (YYYY-MM-DD)
+  reviewEveryDays: 14,        // after this many days the site shows an "may be out of date" note
 
   /* ---------- RBI policy rates (rbi.org.in "Current Rates") ---------- */
   rbi: {
