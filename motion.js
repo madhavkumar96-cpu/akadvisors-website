@@ -94,7 +94,7 @@
   });
 
   /* ---------- Block reveals ---------- */
-  var REVEAL = ".section-head .eyebrow, .section-intro, .service, .step, .card, .partner, .hub-card, .snap, .os-item, .other-head, .faq-item, .scheme, .tpl, .news-item, .notice, .mandate-note, .cta-band p, .cta-band-actions, .rate-tile, .tool-intro, .tool-inputs, .tool-results, .contact-copy > *, .contact-action, .check-group, .os-note, .snap-asof, .scenario-flag";
+  var REVEAL = ".section-head .eyebrow, .section-intro, .service, .step, .card, .partner, .hub-card, .snap, .os-item, .other-head, .faq-item, .scheme, .tpl, .news-item, .notice, .mandate-note, .cta-band p, .cta-band-actions, .rate-tile, .tool-intro, .tool-inputs, .tool-results, .contact-copy > *, .contact-action, .check-group, .os-note, .snap-asof, .svc-row, .file-item, .fee-bar, .fee-notes, .rule-line, .gantt, .file-head, .lender-note";
   var items = gsap.utils.toArray(REVEAL).filter(function (el) { return !el.closest("details .os-body"); });
 
   // Collapsible sections: animate their contents when opened
@@ -122,7 +122,7 @@
 
   /* ---------- Charts and bars grow in ---------- */
   function animateBars() {
-    gsap.utils.toArray(".ladder .bar, .hbars .hb-bar, .stack-bar span").forEach(function (b) {
+    gsap.utils.toArray(".ladder .bar, .hbars .hb-bar, .stack-bar span, .g-bar").forEach(function (b) {
       if (b.dataset.anim) return; b.dataset.anim = "1";
       gsap.from(b, { scaleX: 0, transformOrigin: "left center", duration: 1.1, ease: "power2.out",
         scrollTrigger: { trigger: b, start: "top 92%", once: true } });

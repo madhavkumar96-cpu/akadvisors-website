@@ -15,8 +15,10 @@ var AK_CONFIG = {
   whatsapp: "919871588733",
   loanTypes: [
     "Term loan or capex funding",
-    "Working capital (cash credit, overdraft, WCDL)",
-    "Refinancing or balance transfer",
+    "Working capital limits",
+    "Refinance or rate reset",
+    "NBFC or structured debt",
+    "Debt resolution (restructuring or one-time settlement)",
     "Other advisory (corporate, tax, regulatory, M&A)",
     "Not sure yet: need advice"
   ],
