@@ -1177,3 +1177,18 @@ details.other-services[open] .os-body { animation: os-in .45s cubic-bezier(.2,.7
 .partner-links a { display: inline-flex; align-items: center; gap: 6px; min-height: 36px; font-size: 14px; font-weight: 500; color: var(--charcoal); text-decoration: none; border-bottom: 1px solid var(--gold); }
 .partner-links[hidden] { display: none; }
 .hero-art picture { display: contents; }
+
+/* Anurag's track record strip */
+.track { margin-top: 36px; padding: 28px clamp(20px, 3vw, 32px); background: var(--charcoal); color: var(--on-dark); border-radius: 2px; position: relative; overflow: hidden; }
+.track::after { content: ""; position: absolute; right: -24px; top: 50%; transform: translateY(-50%); width: 140px; height: 240px; background: url("assets/compass-mark.svg") no-repeat center / contain; filter: invert(1); opacity: .05; pointer-events: none; }
+.track-title { margin: 0 0 18px; font-family: var(--serif); font-size: 22px; color: #fff; }
+.track-title::before { content: "/ "; color: var(--gold-on-dark); }
+.track-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line-dark); }
+.track-grid li { padding: 18px 20px 6px 0; display: flex; flex-direction: column; gap: 6px; }
+.track-grid li + li { padding-left: 20px; border-left: 1px solid var(--line-dark); }
+.track-grid b { font-family: var(--serif); font-weight: 500; font-size: clamp(26px, 2.8vw, 36px); line-height: 1; color: #fff; font-variant-numeric: lining-nums; }
+.track-grid span { font-size: 14px; color: var(--on-dark-muted); line-height: 1.45; }
+.track-sectors { margin: 20px 0 0; padding-top: 16px; border-top: 1px solid var(--line-dark); font-size: 14px; color: #D5DBE1; line-height: 1.7; }
+.track-sectors span { display: block; font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--gold-on-dark); margin-bottom: 4px; }
+@media (max-width: 900px) { .track-grid { grid-template-columns: 1fr 1fr; } .track-grid li:nth-child(3) { padding-left: 0; border-left: 0; } .track-grid li:nth-child(n+3) { border-top: 1px solid var(--line-dark); } }
+@media (max-width: 480px) { .track-grid { grid-template-columns: 1fr; } .track-grid li:nth-child(n) { padding-left: 0; border-left: 0; } .track-grid li + li { border-top: 1px solid var(--line-dark); } }
