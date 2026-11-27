@@ -206,11 +206,13 @@
         </ol>
 
         <!-- ============ 2b. OTHER SERVICES (from the earlier KA Associates profile) ============ -->
-        <div class="other-services" id="other-services">
-          <div class="other-head">
+        <details class="other-services" id="other-services">
+          <summary class="other-head">
             <h3>Other services</h3>
             <p>Alongside debt arrangement, we support promoters and overseas businesses with corporate, tax, regulatory and transaction work.</p>
-          </div>
+            <span class="os-toggle" aria-hidden="true"><span class="os-show">View services</span><span class="os-hide">Hide</span></span>
+          </summary>
+          <div class="os-body">
           <div class="os-grid">
             <article class="os-item">
               <h4>Corporate advisory</h4>
@@ -273,7 +275,8 @@
             </article>
           </div>
           <p class="os-note">Where a matter requires a licensed professional, such as a registered valuer, practising company secretary, advocate or patent agent, we will tell you and work with the professional you appoint.</p>
-        </div>
+          </div>
+        </details>
       </div>
     </section>
 
@@ -327,22 +330,36 @@
       </div>
     </section>
 
-    <!-- ============ CTA BAND ============ -->
-    <section class="cta-band" aria-labelledby="cta-band-title">
-      <div class="wrap cta-band-inner">
-        <div>
-          <h2 id="cta-band-title">Planning to raise debt in the next six months?</h2>
-          <p>Start with a confidential call. We will tell you what lenders are likely to look for, and how we would approach your case.</p>
+    <!-- ============ 5. PARTNERS — approved bios only ============ -->
+    <section class="section" id="partners" aria-labelledby="partners-title">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="eyebrow">Partners</p>
+          <h2 id="partners-title">The partners</h2>
+        </header>
+
+        <div class="partners">
+          <article class="partner">
+            <h3>Anurag Kumar</h3>
+            <p class="partner-role">Partner</p>
+            <p>Over 40 years in finance, including CFO roles in private equity and venture capital firms. Qualified cost accountant and law graduate.</p>
+          </article>
+          <article class="partner">
+            <h3>Madhav Kumar</h3>
+            <p class="partner-role">Partner</p>
+            <p>Deal advisory experience at KPMG India and EY-Parthenon. MSc in Banking and Finance from King’s College London. Certified Financial Modeling &amp; Valuation Analyst (FMVA).</p>
+          </article>
         </div>
-        <div class="cta-band-actions">
-          <a class="btn btn-light" href="#contact" data-book>Request a confidential callback</a>
-          <a class="cta-band-link" href="resources.html#templates">Or download our lender-ready financing workbook <span aria-hidden="true">→</span></a>
+
+        <div class="mandate-note">
+          <h3>Whose side we are on</h3>
+          <p>AK Advisors acts on the borrower’s side and is paid by the borrower under an agreed mandate. We do not lend or handle client funds. Lenders make their own credit decisions.</p>
         </div>
       </div>
     </section>
 
     <!-- ============ 4b. RATES, TOOLS, RESOURCES (snapshot values come from data/market-data.js) ============ -->
-    <section class="section" id="insights" aria-labelledby="insights-title">
+    <section class="section section-tint" id="insights" aria-labelledby="insights-title">
       <div class="wrap">
         <header class="section-head">
           <p class="eyebrow">For borrowers</p>
@@ -379,36 +396,8 @@
       </div>
     </section>
 
-    <!-- ============ 5. PARTNERS — approved bios only ============ -->
-    <section class="section section-tint" id="partners" aria-labelledby="partners-title">
-      <div class="wrap">
-        <header class="section-head">
-          <p class="eyebrow">Partners</p>
-          <h2 id="partners-title">The partners</h2>
-        </header>
-
-        <div class="partners">
-          <article class="partner">
-            <h3>Anurag Kumar</h3>
-            <p class="partner-role">Partner</p>
-            <p>Over 40 years in finance, including CFO roles in private equity and venture capital firms. Qualified cost accountant and law graduate.</p>
-          </article>
-          <article class="partner">
-            <h3>Madhav Kumar</h3>
-            <p class="partner-role">Partner</p>
-            <p>Deal advisory experience at KPMG India and EY-Parthenon. MSc in Banking and Finance from King’s College London. Certified Financial Modeling &amp; Valuation Analyst (FMVA).</p>
-          </article>
-        </div>
-
-        <div class="mandate-note">
-          <h3>Whose side we are on</h3>
-          <p>AK Advisors acts on the borrower’s side and is paid by the borrower under an agreed mandate. We do not lend or handle client funds. Lenders make their own credit decisions.</p>
-        </div>
-      </div>
-    </section>
-
     <!-- ============ FAQ ============ -->
-    <section class="section section-tint" id="faq" aria-labelledby="faq-title">
+    <section class="section" id="faq" aria-labelledby="faq-title">
       <div class="wrap faq-wrap">
         <header class="section-head">
           <p class="eyebrow">Questions</p>
@@ -449,7 +438,7 @@
     </section>
 
     <!-- ============ 6. CONTACT ============ -->
-    <section class="section contact" id="contact" aria-labelledby="contact-title">
+    <section class="section section-tint contact" id="contact" aria-labelledby="contact-title">
       <div class="wrap contact-inner">
         <div class="contact-copy">
           <p class="eyebrow">Contact</p>

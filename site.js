@@ -334,4 +334,24 @@ var AK_CONFIG = {
     if (contactSec) io.observe(contactSec);
     if (footer) io.observe(footer);
   }
+  /* ---------- Wide tables: show a scroll cue above any table that overflows ---------- */
+  function markScrollables() {
+    document.querySelectorAll(".table-scroll").forEach(function (t) {
+      var can = t.scrollWidth > t.clientWidth + 2;
+      t.classList.toggle("can-scroll", can);
+      var hint = t.previousElementSibling;
+      if (!hint || !hint.classList.contains("scroll-hint")) {
+        if (!can) return;
+        hint = document.createElement("p");
+        hint.className = "scroll-hint";
+        hint.textContent = "Scroll sideways to see all columns";
+        t.parentNode.insertBefore(hint, t);
+      }
+      hint.classList.toggle("show", can);
+    });
+  }
+  window.addEventListener("load", markScrollables);
+  window.addEventListener("resize", markScrollables);
+  document.addEventListener("toggle", function () { setTimeout(markScrollables, 30); }, true);
+  document.addEventListener("input", function () { setTimeout(markScrollables, 30); });
 })();

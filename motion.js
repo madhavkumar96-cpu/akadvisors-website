@@ -67,9 +67,14 @@
     return words;
   }
 
+  var isMobile = window.matchMedia("(max-width: 820px)").matches;
+  var intro = gsap.timeline({ delay: 0.1 });
+  if (isMobile) {
+    // Phones: logo, headline and call to action are visible immediately; only the compass eases in
+    intro.from(".hero-art", { opacity: 0, y: 14, scale: 0.92, duration: 1.1, ease: "power2.out" }, 0);
+  } else {
   var heroTitle = document.querySelector(".hero h1, .page-hero h1");
   var heroWords = splitWords(heroTitle);
-  var intro = gsap.timeline({ delay: 0.1 });
   intro.from(".site-header", { y: -24, opacity: 0, duration: 0.7 }, 0);
   if (heroWords.length) intro.from(heroWords, { yPercent: 110, duration: 0.9, stagger: 0.045, ease: "power4.out" }, 0.1);
   intro.from([".hero .eyebrow", ".page-hero .crumbs", ".page-hero .eyebrow"].join(","), { y: 12, opacity: 0, duration: 0.6 }, 0.05);
@@ -78,6 +83,7 @@
   intro.from(".hero-proof li", { y: 18, opacity: 0, duration: 0.7, stagger: 0.09 }, 0.75);
   intro.from(".subnav li", { y: 10, opacity: 0, duration: 0.5, stagger: 0.04 }, 0.6);
   intro.from(".hero-art", { opacity: 0, scale: 0.94, duration: 1.4, ease: "power2.out" }, 0.2);
+  }
 
   /* ---------- Section headline reveals ---------- */
   gsap.utils.toArray(".section-head h2, .cta-band h2, .contact h2").forEach(function (h) {
@@ -89,7 +95,15 @@
 
   /* ---------- Block reveals ---------- */
   var REVEAL = ".section-head .eyebrow, .section-intro, .service, .step, .card, .partner, .hub-card, .snap, .os-item, .other-head, .faq-item, .scheme, .tpl, .news-item, .notice, .mandate-note, .cta-band p, .cta-band-actions, .rate-tile, .tool-intro, .tool-inputs, .tool-results, .contact-copy > *, .contact-action, .check-group, .os-note, .snap-asof, .scenario-flag";
-  var items = gsap.utils.toArray(REVEAL);
+  var items = gsap.utils.toArray(REVEAL).filter(function (el) { return !el.closest("details .os-body"); });
+
+  // Collapsible sections: animate their contents when opened
+  gsap.utils.toArray("details").forEach(function (d) {
+    d.addEventListener("toggle", function () {
+      if (d.open) gsap.fromTo(d.querySelectorAll(".os-item, .os-note"), { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.55, stagger: 0.05, overwrite: true });
+      refreshSoon && refreshSoon();
+    });
+  });
   gsap.set(items, { opacity: 0, y: 28 });
   unhide();
   ST.batch(items, {
