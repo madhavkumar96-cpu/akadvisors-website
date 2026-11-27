@@ -94,7 +94,7 @@
   });
 
   /* ---------- Block reveals ---------- */
-  var REVEAL = ".section-head .eyebrow, .section-intro, .service, .step, .card, .partner, .hub-card, .snap, .os-item, .other-head, .faq-item, .scheme, .tpl, .news-item, .notice, .mandate-note, .cta-band p, .cta-band-actions, .rate-tile, .tool-intro, .tool-inputs, .tool-results, .contact-copy > *, .contact-action, .check-group, .os-note, .snap-asof, .svc-row, .file-item, .fee-bar, .fee-notes, .rule-line, .gantt, .file-head, .lender-note, .track";
+  var REVEAL = ".section-head .eyebrow, .section-intro, .service, .step, .card, .partner, .hub-card, .snap, .os-item, .other-head, .faq-item, .scheme, .tpl, .news-item, .notice, .mandate-note, .cta-band p, .cta-band-actions, .rate-tile, .tool-intro, .tool-inputs, .tool-results, .contact-copy > *, .contact-action, .check-group, .os-note, .snap-asof, .svc-row, .file-item, .fee-bar, .fee-notes, .rule-line, .gantt, .file-head, .lender-note, .track, .principles, .qcheck, .onepage, .mandates-note";
   var items = gsap.utils.toArray(REVEAL).filter(function (el) { return !el.closest("details .os-body"); });
 
   // Collapsible sections: animate their contents when opened

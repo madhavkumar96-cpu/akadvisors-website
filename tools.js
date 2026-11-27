@@ -1,4 +1,4 @@
-/* Tools page: five calculators. All amounts in ₹ crore unless stated. */
+/* Tools page: six calculators. All amounts in ₹ crore unless stated. */
 (function () {
   "use strict";
 
@@ -162,11 +162,44 @@
     return html;
   }
 
-  var calcs = { emi: emi, cap: cap, refi: refi, risk: risk, wc: wc };
+  /* ---------- Benchmark and spread ---------- */
+  function benchmarks() {
+    var D = window.AK_DATA, b = { mclr: 8.85, eblr: 8.15, repo: 5.50, asOf: "" };
+    try {
+      D.sbi.current.tenors.forEach(function (t) { if (t[0] === "1 year") b.mclr = t[1]; });
+      b.eblr = parseFloat(D.sbi.eblr.value) || b.eblr;
+      b.repo = D.rbi.rates[0].value;
+      b.asOf = D.asOf;
+    } catch (e) {}
+    return b;
+  }
+  function spread(f) {
+    var B = benchmarks(), P = num(f, "p"), S = num(f, "s"), C = num(f, "c"), N = Math.max(1, Math.round(num(f, "n"))), cut = num(f, "cut");
+    var key = f.elements.b.value, bench = B[key], name = f.elements.b.options[f.elements.b.selectedIndex].text;
+    if (P <= 0) return "<p>Enter a loan amount.</p>";
+    var rate = bench + S, yearInt = P * rate / 100;
+    var cutYear = P * cut / 10000;
+    var avgFactor = (N + 1) / (2 * N);              // average balance on equal principal repayments
+    var cutLife = cutYear * N * avgFactor;
+    var html = '<div class="results-grid">' +
+      result("All-in rate", rate.toFixed(2) + "%", name + " " + bench.toFixed(2) + "% + spread " + S.toFixed(2) + "%", true) +
+      result("Interest in year one", cr(yearInt), "on the full amount drawn") +
+      result("Value of " + cut + " bps lower spread", cr(cutYear), "a year; " + cr(cutLife) + " over " + N + " years on a reducing balance") + "</div>";
+    if (C > 0) {
+      var gap = C - rate;
+      if (gap > 0.05) html += verdict("ok", "<strong>Your current rate is " + (gap * 100).toFixed(0) + " bps above this build-up.</strong> On " + cr(P) + " that is about " + cr(P * gap / 100) + " in the first year. Run the <a href=\"#refi\">refinancing calculator</a> to see whether switching pays after costs.");
+      else if (gap < -0.05) html += verdict("warn", "<strong>Your current rate is " + (-gap * 100).toFixed(0) + " bps below this build-up.</strong> Your existing terms compare well with the spread you entered.");
+      else html += verdict("ok", "<strong>Your current rate is in line with this build-up.</strong>");
+    }
+    html += '<p class="tool-note">Benchmarks as last reviewed' + (B.asOf ? " on " + B.asOf : "") + '. EBLR loans add a credit risk premium (CRP) and business strategy premium (BSP); MCLR loans add a spread fixed at sanction. Loans linked directly to the repo rate carry a larger bank spread. The spread depends on your credit rating, collateral, track record and the lender\'s appetite. Indicative only.</p>';
+    return html;
+  }
+
+  var calcs = { emi: emi, cap: cap, refi: refi, risk: risk, wc: wc, spread: spread };
   document.querySelectorAll("form[data-calc]").forEach(function (f) {
     var key = f.getAttribute("data-calc"), out = document.getElementById(key + "-out");
     function run() {
-      f.querySelectorAll("output").forEach(function (o) { var inp = document.getElementById(o.getAttribute("for")); o.textContent = parseFloat(inp.value).toFixed(2) + "x"; });
+      f.querySelectorAll("output").forEach(function (o) { var inp = document.getElementById(o.getAttribute("for")); o.textContent = inp.getAttribute("data-unit") ? inp.value + " " + inp.getAttribute("data-unit") : parseFloat(inp.value).toFixed(2) + "x"; });
       out.innerHTML = calcs[key](f);
     }
     f.addEventListener("input", run);

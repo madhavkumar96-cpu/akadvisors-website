@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <script>document.documentElement.classList.remove("no-js");if(!matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.classList.add("motion-pending");setTimeout(function(){document.documentElement.classList.remove("motion-pending")},2500);}</script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Business loan calculators: EMI, borrowing capacity, refinancing, DSCR stress test | AK Advisors</title>
+  <title>Business loan calculators: EMI, borrowing capacity, refinancing, rate spread, DSCR stress test | AK Advisors</title>
   <meta name="description" content="Free calculators for Indian businesses: term loan EMI and repayment schedule, borrowing capacity from cash flows, refinancing break-even, DSCR stress test and working capital assessment.">
   <link rel="canonical" href="https://akadvisors.in/tools.html">
   <meta name="theme-color" content="#1D2730">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="AK Advisors and Consultants">
   <meta property="og:title" content="Business loan calculators for Indian companies">
-  <meta property="og:description" content="EMI, borrowing capacity, refinancing break-even, DSCR stress test and working capital.">
+  <meta property="og:description" content="EMI, borrowing capacity, refinancing break-even, benchmark rate and spread, DSCR stress test and working capital.">
   <meta property="og:url" content="https://akadvisors.in/tools.html">
   <meta property="og:locale" content="en_IN">
   <meta property="og:image" content="https://akadvisors.in/assets/og-card.jpg">
@@ -72,6 +72,7 @@
           <button role="tab" id="tab-refi" aria-controls="tool-refi" aria-selected="false" tabindex="-1">Refinancing cost</button>
           <button role="tab" id="tab-risk" aria-controls="tool-risk" aria-selected="false" tabindex="-1">Stress test</button>
           <button role="tab" id="tab-wc" aria-controls="tool-wc" aria-selected="false" tabindex="-1">Working capital</button>
+          <button role="tab" id="tab-spread" aria-controls="tool-spread" aria-selected="false" tabindex="-1">Rate and spread</button>
         </div>
 
         <!-- ============ EMI ============ -->
@@ -183,6 +184,27 @@
           </div>
         </div>
 
+        <!-- ============ BENCHMARK AND SPREAD (benchmarks read from data/market-data.js) ============ -->
+        <div class="tool" id="tool-spread" role="tabpanel" aria-labelledby="tab-spread" tabindex="0" hidden>
+          <div class="tool-intro">
+            <h2>Benchmark rate and spread</h2>
+            <p>How a bank builds your interest rate: a published benchmark plus a spread for credit risk and business strategy. See your all-in rate, the annual interest bill, and what a lower spread is worth.</p>
+          </div>
+          <form class="tool-inputs" data-calc="spread" onsubmit="return false">
+            <div class="field"><label for="sp-p">Loan amount (₹ crore)</label><input id="sp-p" name="p" type="number" min="0" step="0.1" value="50" inputmode="decimal"></div>
+            <div class="field"><label for="sp-b">Benchmark</label><select id="sp-b" name="b"><option value="mclr">SBI 1-year MCLR</option><option value="eblr">SBI EBLR (repo-linked)</option><option value="repo">RBI repo rate</option></select></div>
+            <div class="field"><label for="sp-s">Spread over the benchmark (% a year)</label><input id="sp-s" name="s" type="number" min="0" max="10" step="0.05" value="0.75" inputmode="decimal"></div>
+            <div class="field"><label for="sp-c">Your current all-in rate, if you have a loan (%)</label><input id="sp-c" name="c" type="number" min="0" max="30" step="0.05" value="10.25" inputmode="decimal"></div>
+            <div class="field"><label for="sp-n">Tenor (years)</label><input id="sp-n" name="n" type="number" min="1" max="20" step="1" value="7"></div>
+            <div class="field"><label for="sp-cut">Spread reduction to test (basis points)</label><div class="range-row"><input id="sp-cut" name="cut" type="range" min="10" max="150" step="5" value="40" data-unit="bps"><output for="sp-cut">40 bps</output></div></div>
+          </form>
+          <div class="tool-results" aria-live="polite" id="spread-out"></div>
+          <div class="tool-next">
+            <div><p class="tool-next-title">Next steps</p><ul><li><a href="markets.html#policy">Benchmark history: MCLR, EBLR and repo</a></li><li><a href="tools.html#refi">Test whether moving lenders pays for itself</a></li><li><a href="index.html#contact" data-book>Get your free fundability view</a></li></ul></div>
+            <button type="button" class="btn btn-outline btn-small" data-print="spread">Print or save as PDF</button>
+          </div>
+        </div>
+
         <div class="notice" style="margin-top:48px">
           <p><strong>These are estimates, not offers.</strong> Lenders also consider your credit history, security, promoter contribution, sector, group exposure and their own policies. Results are indicative and are not financial advice. Use them as a starting point for a discussion.</p>
         </div>
@@ -203,6 +225,7 @@
     </div>
   </footer>
 
+  <script src="data/market-data.js" defer></script>
   <script src="site.js" defer></script>
   <script src="tools.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>

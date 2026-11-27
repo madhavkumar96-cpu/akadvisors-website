@@ -27,6 +27,7 @@ var AK_CONFIG = {
     "Not sure yet: need advice"
   ],
   timings: ["Within 1 month", "1–3 months", "3–6 months", "Just exploring"],
+  callFormats: ["Phone call", "Video call", "In-person meeting"],
   callTimes: ["Any time", "Morning (10am–1pm)", "Afternoon (1pm–4pm)", "Evening (4pm–7pm)"]
 };
 
@@ -125,7 +126,10 @@ var AK_CONFIG = {
         "</div>" +
         '<details class="more-details"><summary>Add more details <span class="optional">(optional)</span></summary>' +
         field(p, "details", "Brief details", '<textarea id="' + p + 'details" name="details" rows="3" maxlength="600" placeholder="Purpose of the funding, existing lenders, anything we should know"></textarea>') +
+        '<div class="field-row">' +
+        field(p, "call_format", "How would you like to talk?", '<select id="' + p + 'call_format" name="call_format">' + opts(C.callFormats) + "</select>") +
         field(p, "call_time", "Best time to call", '<select id="' + p + 'call_time" name="call_time">' + opts(C.callTimes) + "</select>") +
+        "</div>" +
         "</details>" +
         '<div class="hp" aria-hidden="true"><label for="' + p + 'web">Website</label><input id="' + p + 'web" name="_gotcha" type="text" tabindex="-1" autocomplete="off"></div>' +
         '<div class="field field-check"><input id="' + p + 'consent" name="consent" type="checkbox" required><label for="' + p + 'consent">I agree to be contacted by AK Advisors about this enquiry. <a href="privacy.html" target="_blank" rel="noopener">How we use your details</a></label></div>' +
@@ -204,6 +208,7 @@ var AK_CONFIG = {
       "Amount required: ₹" + g("amount") + " " + g("amount_unit"),
       "Timing: " + g("timing"),
       g("details") ? "Details: " + g("details") : "",
+      g("call_format") ? "Preferred format: " + g("call_format") : "",
       g("call_time") ? "Best time to call: " + g("call_time") : ""
     ];
     return lines.filter(Boolean).join("\n");
@@ -257,6 +262,7 @@ var AK_CONFIG = {
           "Amount required": "₹" + g("amount") + " " + g("amount_unit"),
           "Timing": g("timing") || "(not given)",
           "Details": g("details") || "(none)",
+          "Preferred format": g("call_format") || "(not given)",
           "Best time to call": g("call_time") || "(not given)",
           "Consent to be contacted": f.querySelector('[name="consent"]').checked ? "Yes" : "No",
           "Page": location.href
@@ -312,6 +318,11 @@ var AK_CONFIG = {
     if (typeof d.showModal !== "function") return; // old browsers follow the link to #contact
     e.preventDefault();
     lastFocus = a;
+    // Pre-fill from the quick fundability check (data-book-type / data-book-amount / data-book-details)
+    var fm = d.querySelector("form");
+    if (a.getAttribute("data-book-type")) { var lt = fm.querySelector('[name="loan_type"]'); lt.value = a.getAttribute("data-book-type"); }
+    if (a.getAttribute("data-book-amount")) { fm.querySelector('[name="amount"]').value = a.getAttribute("data-book-amount"); fm.querySelector('[name="amount_unit"]').value = "crore"; }
+    if (a.getAttribute("data-book-details")) { var dt = fm.querySelector('[name="details"]'); if (!dt.value) dt.value = a.getAttribute("data-book-details"); }
     d.showModal();
     document.documentElement.classList.add("dialog-open");
     var first = d.querySelector('.form-step:not([hidden]) input, .form-step:not([hidden]) a');
@@ -383,4 +394,58 @@ var AK_CONFIG = {
   window.addEventListener("resize", markScrollables);
   document.addEventListener("toggle", function () { setTimeout(markScrollables, 30); }, true);
   document.addEventListener("input", function () { setTimeout(markScrollables, 30); });
+
+  /* ---------- Quick fundability check (homepage) ---------- */
+  var qc = document.querySelector(".qc-form");
+  if (qc) {
+    var QC = {
+      term: { label: "Term loan or capex funding", docs: "term",
+        lenders: function (a) { return a < 25 ? "Private and public sector banks, bilaterally. SIDBI for eligible MSMEs." : a <= 150 ? "Public sector and private banks, usually one or two lenders." : "Two or more banks under multiple banking or a consortium. Infrastructure NBFCs for project loans."; },
+        look: ["Debt service cover (DSCR) on your projections", "Promoter contribution to the project cost", "Security cover and the commissioning date"] },
+      wc: { label: "Working capital limits", docs: "wc",
+        lenders: function (a) { return a <= 150 ? "Your existing banker and one or two challenger banks." : "Multiple banking or a consortium as limits grow."; },
+        look: ["Inventory and debtor cycle", "Drawing power from stock and book-debt statements", "Conduct of your current accounts"] },
+      refi: { label: "Refinance or rate reset", docs: "refi",
+        lenders: function () { return "Banks able to take over loans from NBFCs or higher-cost lenders."; },
+        look: ["Repayment track record on the existing loan", "Foreclosure and switching costs", "Savings after costs over the remaining tenor"] },
+      nbfc: { label: "NBFC or structured debt", docs: "common",
+        lenders: function () { return "NBFCs, credit funds and structured debt desks."; },
+        look: ["Visibility of cash flow", "Collateral and its enforceability", "End use of the funds"] },
+      res: { label: "Debt resolution (restructuring or one-time settlement)", docs: "common",
+        lenders: function () { return "Your existing lenders first: a restructuring or one-time settlement."; },
+        look: ["Viability of the business going forward", "What lenders can recover under each option", "A credible, costed plan"] }
+    };
+    var qcOut = document.getElementById("qc-out");
+    var esc = function (t) { return String(t).replace(/"/g, "&quot;"); };
+    var runQC = function () {
+      var type = qc.elements.type.value, a = parseFloat(qc.elements.amt.value) || 0, to = +qc.elements.to.value, pr = qc.elements.pr.value, k = QC[type];
+      var flags = [];
+      if (a > 0 && a < 5) flags.push('This is below our ₹5 crore minimum. Your bank branch or a <a href="resources.html#schemes">government MSME scheme</a> may suit you better.');
+      if (type === "wc" && a > to * 0.3) flags.push("Working capital limits are often assessed at about 20 to 25% of turnover. This request looks high, so the file will need to explain your operating cycle.");
+      if (type === "term" && a > to * 1.2) flags.push("This is large relative to turnover. Lenders will look closely at promoter contribution and projected cash flow.");
+      if (pr === "mixed") flags.push("A loss year needs a clear explanation in the file before it reaches a credit committee.");
+      if (pr === "loss" && type !== "res") flags.push("Losses make bank finance harder. NBFCs, structured debt or a restructuring may fit better, backed by a clear turnaround plan.");
+      var details = "Quick check: " + k.label + ", turnover " + qc.elements.to.options[qc.elements.to.selectedIndex].text + ", " + qc.elements.pr.options[qc.elements.pr.selectedIndex].text.toLowerCase() + ".";
+      qcOut.innerHTML =
+        '<div class="qc-col"><p class="qc-k">Where it usually fits</p><p>' + k.lenders(a) + "</p></div>" +
+        '<div class="qc-col"><p class="qc-k">What lenders look at first</p><ul>' + k.look.map(function (l) { return "<li>" + l + "</li>"; }).join("") + "</ul></div>" +
+        (flags.length ? '<div class="qc-col qc-flags"><p class="qc-k">Worth knowing</p><ul>' + flags.map(function (l) { return "<li>" + l + "</li>"; }).join("") + "</ul></div>" : "") +
+        '<div class="qc-actions"><a class="btn" href="#contact" data-book data-book-type="' + esc(k.label) + '"' + (a > 0 ? ' data-book-amount="' + a + '"' : "") + ' data-book-details="' + esc(details) + '">Get your free fundability view</a>' +
+        '<a class="text-link" href="resources.html?docs=' + k.docs + '#documents">Documents you will need →</a></div>';
+    };
+    qc.addEventListener("input", runQC);
+    qc.addEventListener("change", runQC);
+    runQC();
+  }
+
+  /* ---------- Sample one-page view: link legend items to the sample ---------- */
+  var op = document.querySelector(".onepage");
+  if (op) {
+    op.querySelectorAll(".op-legend li").forEach(function (li) {
+      li.tabIndex = 0;
+      var on = function (v) { var c = op.querySelector('.op-cell[data-op="' + li.getAttribute("data-op") + '"]'); if (c) c.classList.toggle("is-on", v); li.classList.toggle("is-on", v); };
+      ["mouseenter", "focus"].forEach(function (ev) { li.addEventListener(ev, function () { on(true); }); });
+      ["mouseleave", "blur"].forEach(function (ev) { li.addEventListener(ev, function () { on(false); }); });
+    });
+  }
 })();
