@@ -108,8 +108,8 @@ var AK_CONFIG = {
     f.setAttribute("aria-label", "Request a confidential callback");
     f.innerHTML =
       '<div class="form-step" data-step="form">' +
-        (context === "dialog" ? "" : '<h3>Request a confidential callback</h3><p class="form-sub">Tell us what you need. A partner will call you to arrange a confidential discussion.</p>') +
-        '<p class="promise">A partner calls you within one business day. Your first one-page view of what is fundable is free.</p>' +
+        (context === "dialog" ? "" : '<h3>Request a confidential callback</h3><p class="form-sub">Tell us what you need and we will call you to arrange a confidential discussion.</p>') +
+        '<p class="promise">We call you within one business day. Your first one-page view of what is fundable is free.</p>' +
         '<div class="field-row">' +
           field(p, "name", "Full name", '<input id="' + p + 'name" name="name" type="text" autocomplete="name" required>') +
           field(p, "company", 'Company <span class="optional">(optional)</span>', '<input id="' + p + 'company" name="company" type="text" autocomplete="organization">') +
@@ -144,7 +144,7 @@ var AK_CONFIG = {
         '<button type="button" class="text-link link-btn" data-back>Edit details</button>' +
       "</div>" +
       '<div class="form-step form-done" data-step="thanks" hidden tabindex="-1">' +
-        "<h3>Thank you</h3><p>We have received your request. A partner will call you within one business day.</p>" +
+        "<h3>Thank you</h3><p>We have received your request and will call you within one business day.</p>" +
       "</div>";
     wire(f);
     return f;
@@ -296,7 +296,7 @@ var AK_CONFIG = {
     dialog.setAttribute("aria-labelledby", "book-title");
     dialog.innerHTML =
       '<div class="book-head"><div><p class="eyebrow">Confidential</p><h2 id="book-title">Get your free fundability view</h2>' +
-      '<p class="form-sub">Share a few details and a partner will call you to arrange a confidential discussion.</p></div>' +
+      '<p class="form-sub">Share a few details and we will call you to arrange a confidential discussion.</p></div>' +
       '<button type="button" class="book-close" aria-label="Close"><span aria-hidden="true">×</span></button></div>';
     dialog.appendChild(buildForm("dialog"));
     document.body.appendChild(dialog);
